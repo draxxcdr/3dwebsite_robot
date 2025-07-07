@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AURA - The Future of AI and Robotics" />
+    <meta name="keywords" content="AURA, AI, Robotics, Future, Technology" />
+    <meta name="author" content="Rullz" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Title -->
+    <title>AURA - The Future of AI</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/10087/10087869.png" type="image/png" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Vendor Files -->
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet"> <!-- Google Web Fonts | Audio Wide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script> <!-- Gsap -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.22/build/spline-viewer.js"></script> <!-- Spline Viewer -->
+
+    <!-- Custom Css -->
+    <style>
+        body {
+            font-family: 'Audiowide', cursive;
+            background-color: #000000;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .text-glow {
+            transition: text-shadow 0.5s ease, filter 0.5s ease;
+            filter: brightness(1);
+        }
+
+        .text-glow:hover {
+            text-shadow: 0 0 8px #D3D3D3, 0 0 20px #D3D3D3, 0 0 40px #ffffff;
+            filter: brightness(1.2);
+        }
+
+        #glow-text span {
+            transition: text-shadow 0.5s ease, filter 0.5s ease;
+        }
+
+        .button-glow {
+            box-shadow: 0 0 15px rgba(200, 200, 200, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .button-glow:hover {
+            box-shadow: 0 0 25px rgba(220, 220, 220, 0.75), 0 0 50px rgba(255, 255, 255, 0.5);
+        }
+    </style>
+
+</head>
+
+<body class="bg-black text-gray-200 overflow-hidden">
+
+    <!-- Container -->
+    <div class="relative min-h-screen w-full flex flex-col items-center justify-center p-4">
+
+        <!-- Spline 3D Robot Scene -->
+        <div class="absolute inset-0 z-0">
+            <spline-viewer url="https://prod.spline.design/2p3h5L0I4dmDlHPW/scene.splinecode"></spline-viewer>
+        </div> <!-- End - Spline 3D Robot Scene -->
+
+        <!-- Navbar -->
+        <header id="navbar"
+            class="absolute top-0 left-0 right-0 flex items-center justify-between p-6 md:p-8 w-full max-w-screen-xl mx-auto z-10 opacity-0 pointer-events-none">
+            <a href="#" class="text-3xl font-black text-white text-glow pointer-events-auto">AURA</a>
+            <nav class="pointer-events-auto">
+                <ul class="hidden md:flex items-center space-x-10 text-sm font-bold tracking-wider">
+                    <li><a href="#" class="text-white text-glow">Technology</a></li>
+                    <li><a href="#" class="text-white text-glow">Vision</a></li>
+                    <li><a href="#" class="text-white text-glow">Contact</a></li>
+                </ul>
+            </nav>
+        </header> <!-- End - Navbar -->
+
+
+        <!-- Main Content -->
+        <main id="main-content"
+            class="relative z-10 flex flex-col items-center justify-center text-center mt-20 md:mt-0 opacity-0 pointer-events-none">
+            <div class="w-full relative top-20">
+                <!-- Headline split into two lines -->
+                <h1 id="glow-text"
+                    class="text-3xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-tight flex flex-wrap justify-center gap-1">
+                    <span>M</span><span>E</span><span>E</span><span>T</span>
+                    <span class="no-glow mx-2"> </span>
+                    <span>T</span><span>H</span><span>E</span>
+                    <span class="no-glow mx-2"> </span>
+                    <span>F</span><span>U</span><span>T</span><span>U</span><span>R</span><span>E</span>
+                </h1>
+
+                <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto text-gray-400 font-light tracking-wide">
+                    Discover AURA, the pinnacle of artificial intelligence and robotic design.
+                </p>
+            </div>
+        </main> <!-- End - Main Content -->
+
+    </div> <!-- End - Container -->
+
+    <!-- Javascript Main -->
+    <script>
+        // GSAP Animation for Navbar and Main Content
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+            gsap.set("#navbar", { y: -50, opacity: 0 });
+            gsap.set("#main-content", { y: 50, opacity: 0, scale: 0.95 });
+
+            tl.to("#navbar", { y: 0, opacity: 1, duration: 1.5 }, "+=0.5")
+                .to("#main-content", { y: 0, opacity: 1, scale: 1, duration: 1.5 }, "-=1");
+
+            // Glow Animation for Headline
+            const letters = document.querySelectorAll("#glow-text span:not(.no-glow)");
+            const delayBetween = 1;
+
+            // Set initial styles for glow effect
+            function glowSequence(elements, reverse = false) {
+                const seq = reverse ? [...elements].reverse() : elements;
+
+                seq.forEach((el, i) => {
+                    gsap.to(el, {
+                        textShadow: "0 0 8px #D3D3D3, 0 0 20px #D3D3D3, 0 0 40px #ffffff",
+                        filter: "brightness(1.3)",
+                        duration: 0.5,
+                        delay: i * delayBetween,
+                        onComplete: () => {
+                            gsap.to(el, {
+                                textShadow: "none",
+                                filter: "brightness(1)",
+                                duration: 0.5,
+                                delay: 0.5
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Loop the glow effect
+            function loopGlow() {
+                glowSequence(letters, false);
+                glowSequence(letters, true);
+                const maxDuration = (letters.length - 1) * delayBetween + 2;
+                setTimeout(loopGlow, maxDuration * 1000);
+            }
+
+            loopGlow();
+        });
+    </script>
+
+
+</body>
+
+</html>
